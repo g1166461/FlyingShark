@@ -2,6 +2,8 @@ package comps413f.android.flyingandroid;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -49,7 +51,8 @@ public class FlyingAndroidView extends SurfaceView {
 
     /** Whether the game is over. */
     private boolean gameOver;
-
+    private Bitmap gameOverPicture;
+    
     /** Whether the game is paused and waiting for touching to start. */
     private boolean waitForTouch = true;
     /** Saving and handling of user input of touch events. */
@@ -180,8 +183,12 @@ public class FlyingAndroidView extends SurfaceView {
                 float gameTime = totalTime / 1000.0f;
                 textPaint.setTextSize(2 * TEXT_SIZE);
                 textPaint.setTextAlign(Paint.Align.CENTER);
-                canvas.drawText(res.getString(R.string.game_over), getWidth() / 2, getHeight() / 2, textPaint);
-                canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (2 * TEXT_SIZE), textPaint);
+                gameOverPicture=BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover);
+                int scaledWidth = gameOverPicture.getWidth()/4;
+                int scaledHeight = gameOverPicture.getHeight()/4;
+                gameOverPicture = Bitmap.createScaledBitmap(gameOverPicture, scaledWidth, scaledHeight, true);
+                canvas.drawBitmap(gameOverPicture,(FlyingAndroidView.arenaWidth-gameOverPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -gameOverPicture.getHeight())/ 2, textPaint);
+                canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
             }
             else if (waitForTouch) {
                 textPaint.setTextSize(2 * TEXT_SIZE);
