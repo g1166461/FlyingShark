@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FlyingAndroid</string>
+    <string name="action_restart">Restart</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="time_elapse">"Time: %1$.1fs"</string>
+    <string name="game_over">Game Over!</string>
+    <string name="start">Touch to start!</string>
+
+</resources>
