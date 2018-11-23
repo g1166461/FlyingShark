@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -55,10 +56,12 @@ public class FlyingAndroidView extends SurfaceView {
     
     /** Whether the game is paused and waiting for touching to start. */
     private boolean waitForTouch = true;
+
     /** Saving and handling of user input of touch events. */
     private class UserInput {
         /** Whether there is a user input present. */
         boolean present = false;
+
 
         /**
          * Sets the user input mouse event for later processing. This method is
@@ -224,7 +227,12 @@ public class FlyingAndroidView extends SurfaceView {
         // i. Set gameOver to true
         // ii. Stop the animation of the flying andriod
         // iii. Stop the scrolling background
+
+        /**Vibration*/
+        Vibrator vibrater = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        long[] pattern = new long[] { 0, 200, 200, 200 };
         gameOver = true;
+        vibrater.vibrate(pattern, -1);
         ((AnimationDrawable)(flyingAndroid.getDrawable())).stop();
         background.stop(true);
     }
