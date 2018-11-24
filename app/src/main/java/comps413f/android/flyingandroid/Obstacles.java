@@ -15,8 +15,8 @@ public class Obstacles {
         // Add code here
         // Task 1: Create a pair of obstacles
         // i. Randomize the distance between upper and lower obstacles
-        int minDistance = (int) (0.2 * FlyingAndroidView.arenaHeight);
-        int maxDistance = (int) (0.3 * FlyingAndroidView.arenaHeight);
+        int minDistance = (int) (0.3 * FlyingAndroidView.arenaHeight);
+        int maxDistance = (int) (0.4 * FlyingAndroidView.arenaHeight);
         int distance = minDistance + (int) (Math.random() * (maxDistance - minDistance));
 
         // ii. Randomize y position of the upper obstacle
