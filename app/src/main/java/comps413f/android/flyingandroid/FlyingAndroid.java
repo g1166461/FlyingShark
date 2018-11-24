@@ -13,7 +13,6 @@ public class FlyingAndroid extends Sprite {
     public FlyingAndroid(Callback callback, Context context) {
         drawable = (AnimationDrawable) context.getResources().getDrawable(R.drawable.flying_android);
         drawable.setCallback(callback);
-
         dy = INITIAL_DY;
     }
 
@@ -41,7 +40,7 @@ public class FlyingAndroid extends Sprite {
             // Add code here
             // Task 2: Move the flying android
             // i. Update the new y position of the flying android
-            curPos.y += dy;
+            curPos.y += dy*1.5;
 
             // ii. Update the boundary of the flying android drawable
             updateBounds();
