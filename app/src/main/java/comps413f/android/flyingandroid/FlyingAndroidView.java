@@ -80,8 +80,7 @@ public class FlyingAndroidView extends SurfaceView {
                 {
                     case MotionEvent.ACTION_DOWN:
                         //Check if the x and y position of the touch is inside the bitmap
-                        if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+200) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + 350) )
-                        {
+                        if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && (x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150) ))                        {
                             newGame(false);
                             //Bitmap touched
                         }
@@ -213,8 +212,7 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledWidth2 = restartPicture.getWidth()/8;
                 int scaledHeight2 = restartPicture.getHeight()/8;
                 restartPicture= Bitmap.createScaledBitmap(restartPicture, scaledWidth2, scaledHeight2, true);
-                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+200, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + 350);
-                canvas.drawBitmap(restartPicture, null, r, textPaint);
+                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);                canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
             }
             else if (waitForTouch) {
