@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
@@ -28,7 +29,7 @@ public class FlyingAndroidView extends SurfaceView {
     /** Width and height of the arena. */
     public static int arenaWidth;
     public static int arenaHeight;
-
+    private Rect r=new Rect();
     /** Animation object, the flying android. */
     private FlyingAndroid flyingAndroid;
     /** List of obstacles objects, i.e., pairs of pipes. */
@@ -53,7 +54,8 @@ public class FlyingAndroidView extends SurfaceView {
     /** Whether the game is over. */
     private boolean gameOver;
     private Bitmap gameOverPicture;
-    
+    private Bitmap restartPicture;
+
     /** Whether the game is paused and waiting for touching to start. */
     private boolean waitForTouch = true;
 
@@ -69,6 +71,20 @@ public class FlyingAndroidView extends SurfaceView {
          */
         synchronized void save(MotionEvent event) {
             present = true;
+            if(present&&gameOver){/*Restart Game*/
+                float x = event.getX();
+                float y = event.getY();
+                switch(event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        //Check if the x and y position of the touch is inside the bitmap
+                        if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+200) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + 350) )
+                        {
+                            newGame(false);
+                            //Bitmap touched
+                        }
+                }
+            }
         }
 
         /**
@@ -102,7 +118,7 @@ public class FlyingAndroidView extends SurfaceView {
     }
     /** User input object of touch events. */
     private UserInput userInput = new UserInput();
-    
+
     /** Task for the game loop. */
     private class AnimationTask extends TimerTask {
         @Override
@@ -111,13 +127,13 @@ public class FlyingAndroidView extends SurfaceView {
             if (!gameOver && !waitForTouch) {
                 // Add code here
                 // Task 5: Game loop implementation
-                
+
                 // i. Create obstacles
                 createObstacles();
 
                 // ii. Move the flying android
                 flyingAndroid.move();
-                
+
                 // iii. If the flying android moved out from the arena, call method gameOver
                 if (flyingAndroid.isOutOfArena()) {
                     gameOver();
@@ -125,19 +141,19 @@ public class FlyingAndroidView extends SurfaceView {
                 else {
                     // iv. Obstacles manipulation
                     for (int i = 0; i < obstacles.size(); i++) {
-                        // a. Move the obstacles 
+                        // a. Move the obstacles
                         obstacles.get(i).move();
-    
+
                         // b. Determine if the flying android collided with any obstacle
                         if (obstacles.get(i).collideWith(flyingAndroid)) {
                             gameOver();
                             break;
                         }
-    
+
                         // c. Remove any obstacle that already moved out from the arena
                         if (obstacles.get(i).isOutOfArena())
                             obstacles.remove(i);
-                    }                
+                    }
                 }
             }
 
@@ -150,7 +166,7 @@ public class FlyingAndroidView extends SurfaceView {
                 // b. Draw the obstacles
                 for (int i = 0; i < obstacles.size(); i++) {
                     obstacles.get(i).drawOn(canvas);
-                }                
+                }
 
                 // c. Draw the flying android
                 flyingAndroid.drawOn(canvas);
@@ -191,6 +207,12 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledHeight = gameOverPicture.getHeight()/4;
                 gameOverPicture = Bitmap.createScaledBitmap(gameOverPicture, scaledWidth, scaledHeight, true);
                 canvas.drawBitmap(gameOverPicture,(FlyingAndroidView.arenaWidth-gameOverPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -gameOverPicture.getHeight())/ 2, textPaint);
+                restartPicture=BitmapFactory.decodeResource(context.getResources(), R.drawable.restart);
+                int scaledWidth2 = restartPicture.getWidth()/8;
+                int scaledHeight2 = restartPicture.getHeight()/8;
+                restartPicture= Bitmap.createScaledBitmap(restartPicture, scaledWidth2, scaledHeight2, true);
+                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+200, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + 350);
+                canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
             }
             else if (waitForTouch) {
@@ -219,7 +241,7 @@ public class FlyingAndroidView extends SurfaceView {
             obstacles.add(o);
         }
     }
-    
+
     /** Game over. */
     public void gameOver() {
         // Add code here
@@ -281,13 +303,13 @@ public class FlyingAndroidView extends SurfaceView {
     }
 
     /**
-     * Constructs an animation view. This performs initialization including the 
+     * Constructs an animation view. This performs initialization including the
      * event handlers for key presses and touches.
      */
     public FlyingAndroidView(Context context) {
         super(context);
         this.context = context;
-        
+
         setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
