@@ -56,6 +56,10 @@ public class FlyingAndroidView extends SurfaceView {
     private Bitmap gameOverPicture;
     private Bitmap restartPicture;
 
+    /**Pause Game*/
+    private Bitmap pausePicture;
+
+
     /** Whether the game is paused and waiting for touching to start. */
     private boolean waitForTouch = true;
 
@@ -107,6 +111,9 @@ public class FlyingAndroidView extends SurfaceView {
                     startTime = System.currentTimeMillis();
                     background.stop(false);
                     ((AnimationDrawable)(flyingAndroid.getDrawable())).start();
+
+
+
                 }
                 else {  // Game active
                     flyingAndroid.fly();
@@ -186,6 +193,15 @@ public class FlyingAndroidView extends SurfaceView {
             textPaint.setColor(Color.BLACK);
             textPaint.setTextSize(TEXT_SIZE);
 
+            /**Pause*/
+            if(!gameOver && !waitForTouch) {
+                pausePicture = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
+                int scaledWidth3 = pausePicture.getWidth() / 8;
+                int scaledHeight3 = pausePicture.getHeight() / 8;
+                pausePicture = Bitmap.createScaledBitmap(pausePicture, scaledWidth3, scaledHeight3, true);
+                canvas.drawBitmap(pausePicture, (FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20, (FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20, textPaint);
+            }
+
             // Add code here
             // Task 1: Draw game information
             // If game over
@@ -214,6 +230,8 @@ public class FlyingAndroidView extends SurfaceView {
                 r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
                 canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
+
+
             }
             else if (waitForTouch) {
                 textPaint.setTextSize(2 * TEXT_SIZE);
