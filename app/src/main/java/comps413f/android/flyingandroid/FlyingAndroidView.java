@@ -10,6 +10,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.AsyncPlayer;
+import android.net.Uri;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -82,8 +84,7 @@ public class FlyingAndroidView extends SurfaceView {
                 {
                     case MotionEvent.ACTION_DOWN:
                         //Check if the x and y position of the touch is inside the bitmap
-                        if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && (x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150) ))
-                        {
+                        if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && (x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150) ))                        {
                             newGame(false);
                             //Bitmap touched
                         }
@@ -227,8 +228,7 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledWidth2 = restartPicture.getWidth()/8;
                 int scaledHeight2 = restartPicture.getHeight()/8;
                 restartPicture= Bitmap.createScaledBitmap(restartPicture, scaledWidth2, scaledHeight2, true);
-                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
-                canvas.drawBitmap(restartPicture, null, r, textPaint);
+                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);                canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
 
 
@@ -269,10 +269,9 @@ public class FlyingAndroidView extends SurfaceView {
         // iii. Stop the scrolling background
 
         /**Vibration*/
-        Vibrator vibrater = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        long[] pattern = new long[] { 0, 200, 200, 200 };
         gameOver = true;
-        vibrater.vibrate(pattern, -1);
+        Effect Effect = new Effect();
+        Effect.vibrate();
         ((AnimationDrawable)(flyingAndroid.getDrawable())).stop();
         background.stop(true);
     }
@@ -353,5 +352,15 @@ public class FlyingAndroidView extends SurfaceView {
     }
 
     public void invalidateDrawable(Drawable drawable) {
+    }
+
+    private class Effect {
+
+        private Vibrator vibrater = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        private long[] pattern = new long[]{0, 200, 200, 200};
+
+        void vibrate() {
+            vibrater.vibrate(pattern, -1);
+        }
     }
 }
