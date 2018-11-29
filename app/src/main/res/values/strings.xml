@@ -12,6 +12,7 @@
 
     <string-array name="mainmenu">
         <item>New game</item>
-        <item>preferences</item>
+        <item>Preferences</item>
+        <item>About</item>
     </string-array>
 </resources>
