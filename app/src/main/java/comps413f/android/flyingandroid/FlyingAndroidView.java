@@ -120,7 +120,9 @@ public class FlyingAndroidView extends SurfaceView {
 
                             //Pause Game
                             if( x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20+100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20+100)){
+
                                 Intent intent = new Intent(context,MenuActivity.class);
+                                intent.putExtra("changePause",true);
                                 context.startActivity(intent);
                                 //Bitmap touched
                             }
