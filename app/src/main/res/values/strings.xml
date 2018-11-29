@@ -8,5 +8,10 @@
     <string name="time_elapse">"Time: %1$.1fs"</string>
     <string name="game_over">Game Over!</string>
     <string name="start">Touch to start!</string>
+    <string name="title_activity_menu">MenuActivity</string>
 
+    <string-array name="mainmenu">
+        <item>New game</item>
+        <item>preferences</item>
+    </string-array>
 </resources>
