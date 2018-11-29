@@ -8,8 +8,31 @@
     <string name="time_elapse">"Time: %1$.1fs"</string>
     <string name="game_over">Game Over!</string>
     <string name="start">Touch to start!</string>
-    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_menu">FlyingShark</string>
+    <string name="game_settings">Game settings</string>
+    <string name="category_key">category</string>
+    <string name="category_default">0</string>
+    <string name="category_title">Category</string>
+    <string name="category_summary">Difficulty</string>
+    <string name="vibration_settings">Vibration</string>
+    <string name="sound_settings">Sound</string>
+    <string name="preferences">Preferences</string>
+    <string name="pref_splash_key">splash</string>
+    <bool name="pref_splash_default">true</bool>
+    <string name="pref_splash_title">Splash screen</string>
+    <string name="pref_vibration_summary">Turn on/off vibration</string>
+    <string name="pref_sound_summary">Turn on/off music</string>
 
+    <string-array name="category_names">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+    <string-array name="category_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
     <string-array name="mainmenu">
         <item>New game</item>
         <item>Preferences</item>

@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FlyingAndroidPrefActivity"
+            android:label="@string/preferences" >
+        </activity>
     </application>
 
 </manifest>

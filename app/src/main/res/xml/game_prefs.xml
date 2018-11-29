@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="@string/game_settings">
+
+        <ListPreference
+            android:key="@string/category_key"
+            android:title="@string/category_title"
+            android:summary="@string/category_summary"
+            android:entries="@array/category_names"
+            android:entryValues="@array/category_values"
+            android:defaultValue="@string/category_default" />
+    
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="@string/sound_settings">
+        
+        <CheckBoxPreference
+            android:key="@string/pref_splash_key"
+            android:title="@string/sound_settings"
+            android:summary="@string/pref_sound_summary"
+            android:defaultValue="@bool/pref_splash_default" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/vibration_settings">
+
+        <CheckBoxPreference
+            android:key="@string/pref_splash_key"
+            android:title="@string/vibration_settings"
+            android:summary="@string/pref_vibration_summary"
+            android:defaultValue="@bool/pref_splash_default" />
+    </PreferenceCategory>
+    
+</PreferenceScreen>
