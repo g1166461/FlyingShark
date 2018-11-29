@@ -1,6 +1,7 @@
 package comps413f.android.flyingandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +33,7 @@ public class FlyingAndroidView extends SurfaceView {
     public static int arenaWidth;
     public static int arenaHeight;
     private Rect r=new Rect();
+    private Rect r2=new Rect();
     /** Animation object, the flying android. */
     private FlyingAndroid flyingAndroid;
     /** List of obstacles objects, i.e., pairs of pipes. */
@@ -69,7 +71,8 @@ public class FlyingAndroidView extends SurfaceView {
     private class UserInput {
         /** Whether there is a user input present. */
         boolean present = false;
-
+        int action;
+        float x,y;
 
         /**
          * Sets the user input mouse event for later processing. This method is
@@ -77,17 +80,13 @@ public class FlyingAndroidView extends SurfaceView {
          */
         synchronized void save(MotionEvent event) {
             present = true;
+            action=event.getAction();
+            x=event.getX();
+            y=event.getY();
             if(present&&gameOver){/*Restart Game*/
-                float x = event.getX();
-                float y = event.getY();
-                switch(event.getAction())
-                {
-                    case MotionEvent.ACTION_DOWN:
-                        //Check if the x and y position of the touch is inside the bitmap
-                        if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && (x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150) ))                        {
-                            newGame(false);
-                            //Bitmap touched
-                        }
+                //Check if the x and y position of the touch is inside the bitmap
+                if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150)){
+                    newGame(false);
                 }
             }
         }
@@ -118,6 +117,13 @@ public class FlyingAndroidView extends SurfaceView {
                 }
                 else {  // Game active
                     flyingAndroid.fly();
+
+                            //Pause Game
+                            if( x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20+100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20+100)){
+                                Intent intent = new Intent(context,MenuActivity.class);
+                                context.startActivity(intent);
+                                //Bitmap touched
+                            }
                 }
 
                 present = false;
@@ -200,7 +206,8 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledWidth3 = pausePicture.getWidth() / 8;
                 int scaledHeight3 = pausePicture.getHeight() / 8;
                 pausePicture = Bitmap.createScaledBitmap(pausePicture, scaledWidth3, scaledHeight3, true);
-                canvas.drawBitmap(pausePicture, (FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20, (FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20, textPaint);
+                r2.set((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20, (FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20, (FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20+100, (FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20+100);
+                canvas.drawBitmap(pausePicture,null,r2,textPaint);
             }
 
             // Add code here
@@ -228,7 +235,8 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledWidth2 = restartPicture.getWidth()/8;
                 int scaledHeight2 = restartPicture.getHeight()/8;
                 restartPicture= Bitmap.createScaledBitmap(restartPicture, scaledWidth2, scaledHeight2, true);
-                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);                canvas.drawBitmap(restartPicture, null, r, textPaint);
+                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
+                canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
 
 
