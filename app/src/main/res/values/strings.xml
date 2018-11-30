@@ -17,8 +17,10 @@
     <string name="vibration_settings">Vibration</string>
     <string name="sound_settings">Sound</string>
     <string name="preferences">Preferences</string>
-    <string name="pref_splash_key">splash</string>
-    <bool name="pref_splash_default">true</bool>
+    <string name="pref_sound_key">sound</string>
+    <string name="pref_vibration_key">vibration</string>
+    <bool name="pref_sound_default">true</bool>
+    <bool name="pref_vibration_default">true</bool>
     <string name="pref_splash_title">Splash screen</string>
     <string name="pref_vibration_summary">Turn on/off vibration</string>
     <string name="pref_sound_summary">Turn on/off music</string>

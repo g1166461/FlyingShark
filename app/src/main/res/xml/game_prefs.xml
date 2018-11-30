@@ -18,20 +18,20 @@
         android:title="@string/sound_settings">
         
         <CheckBoxPreference
-            android:key="@string/pref_splash_key"
+            android:key="@string/pref_sound_key"
             android:title="@string/sound_settings"
             android:summary="@string/pref_sound_summary"
-            android:defaultValue="@bool/pref_splash_default" />
+            android:defaultValue="@bool/pref_sound_default" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/vibration_settings">
 
         <CheckBoxPreference
-            android:key="@string/pref_splash_key"
+            android:key="@string/pref_vibration_key"
             android:title="@string/vibration_settings"
             android:summary="@string/pref_vibration_summary"
-            android:defaultValue="@bool/pref_splash_default" />
+            android:defaultValue="@bool/pref_vibration_default" />
     </PreferenceCategory>
     
 </PreferenceScreen>
