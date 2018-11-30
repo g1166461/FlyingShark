@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AsyncPlayer;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.view.MotionEvent;
@@ -139,9 +140,9 @@ public class FlyingAndroidView extends SurfaceView {
             }
         }
     }
+
     /** User input object of touch events. */
     private UserInput userInput = new UserInput();
-
     /** Task for the game loop. */
     private class AnimationTask extends TimerTask {
         @Override
@@ -287,9 +288,13 @@ public class FlyingAndroidView extends SurfaceView {
         // iii. Stop the scrolling background
 
         /**Vibration*/
+        Effect effect = new Effect();
+        effect.vibrateOn = true;
+        effect.soundOn = true;
         gameOver = true;
-        Effect Effect = new Effect();
-        Effect.vibrate();
+
+        effect.vibrate();
+        effect.playSound(R.raw.beep);
         ((AnimationDrawable)(flyingAndroid.getDrawable())).stop();
         background.stop(true);
     }
@@ -375,9 +380,22 @@ public class FlyingAndroidView extends SurfaceView {
 
         private Vibrator vibrater = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         private long[] pattern = new long[]{0, 200, 200, 200};
+        /** Whether to play sound or not. */
+        boolean soundOn ;
+        /** Whether to vibrate the device or not. */
+        boolean vibrateOn ;
+        private AsyncPlayer player = new AsyncPlayer("memory");
+        void playSound(int resId) {
+            if (soundOn) {
+                Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + resId);
+                player.play(context, uri, false, AudioManager.STREAM_MUSIC);
+            }
+        }
 
+        /** Vibrates if vibrateOn is set. */
         void vibrate() {
-            vibrater.vibrate(pattern, -1);
+            if (vibrateOn)
+                vibrater.vibrate(pattern, -1);
         }
     }
 }
