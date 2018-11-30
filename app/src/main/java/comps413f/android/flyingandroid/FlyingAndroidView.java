@@ -117,20 +117,20 @@ public class FlyingAndroidView extends SurfaceView {
                 }
                 else {  // Game active
                     flyingAndroid.fly();
-
                             //Pause Game
-                            if( x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20+100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20+100)){
-                                if(count==0) {
-                                    Intent intent = new Intent(context, MenuActivity.class);
-                                    intent.putExtra("changePause", true);
-                                    context.startActivity(intent);
-                                    count++;
-                                    //Bitmap touched
-                                }else{
-                                    Intent intent = new Intent(context, MenuActivity.class);
-                                    intent.putExtra("changePause", true);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                    context.startActivity(intent);
+                            if(!gameOver) {
+                                if (x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20 + 100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20 + 100)) {
+                                    if(count==0) {
+                                        Intent intent = new Intent(context, MenuActivity.class);
+                                        intent.putExtra("changePause", true);
+                                        context.startActivity(intent);
+                                        count++;
+                                    }else{
+                                        Intent intent = new Intent(context, MenuActivity.class);
+                                        intent.putExtra("changePause", true);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                        context.startActivity(intent);
+                                    }
                                 }
                             }
                 }
@@ -232,6 +232,7 @@ public class FlyingAndroidView extends SurfaceView {
                     totalTime += (System.currentTimeMillis() - startTime);
                     startTime = 0;
                 }
+                count=0;
                 float gameTime = totalTime / 1000.0f;
                 textPaint.setTextSize(2 * TEXT_SIZE);
                 textPaint.setTextAlign(Paint.Align.CENTER);
@@ -319,7 +320,6 @@ public class FlyingAndroidView extends SurfaceView {
         if (newGame) {
             arenaWidth = getWidth();
             arenaHeight = getHeight();
-
             background = new Background(context);
             flyingAndroid = new FlyingAndroid(this, context);
         }
@@ -328,7 +328,6 @@ public class FlyingAndroidView extends SurfaceView {
         waitForTouch = true;
         totalTime = 0;
         startTime = -1;
-        count=0;
         obstacleCreationTime = -1;
         obstacles.clear();
         flyingAndroid.reset();
