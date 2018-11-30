@@ -45,7 +45,7 @@ public class FlyingAndroidView extends SurfaceView {
     private Timer timer = null;
 
     private Context context;
-
+    private int count;
     /** Start time of the game. */
     private long startTime = 0;
     /** Pause time of the game. */
@@ -120,11 +120,18 @@ public class FlyingAndroidView extends SurfaceView {
 
                             //Pause Game
                             if( x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20+100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20+100)){
-
-                                Intent intent = new Intent(context,MenuActivity.class);
-                                intent.putExtra("changePause",true);
-                                context.startActivity(intent);
-                                //Bitmap touched
+                                if(count==0) {
+                                    Intent intent = new Intent(context, MenuActivity.class);
+                                    intent.putExtra("changePause", true);
+                                    context.startActivity(intent);
+                                    count++;
+                                    //Bitmap touched
+                                }else{
+                                    Intent intent = new Intent(context, MenuActivity.class);
+                                    intent.putExtra("changePause", true);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                    context.startActivity(intent);
+                                }
                             }
                 }
 
@@ -321,6 +328,7 @@ public class FlyingAndroidView extends SurfaceView {
         waitForTouch = true;
         totalTime = 0;
         startTime = -1;
+        count=0;
         obstacleCreationTime = -1;
         obstacles.clear();
         flyingAndroid.reset();
