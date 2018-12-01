@@ -24,8 +24,8 @@ public class Killer extends Sprite {
         killerRotatedPicture=Bitmap.createBitmap(killerPicture,0,0,scaledWidth,FlyingAndroidView.arenaHeight/10,matrix,true);
         modifiedPicture=new BitmapDrawable(context.getResources(),killerRotatedPicture);
         drawable = modifiedPicture;
-        dx = Background.SpeedXMagnitude;
-        setPosition(FlyingAndroidView.arenaHeight/2,(float)(Math.random()*2)*(FlyingAndroidView.arenaHeight/2));
+        dx = Background.SpeedXMagnitude-2;
+        setPosition(FlyingAndroidView.arenaWidth,(float)(Math.random()*2)*(FlyingAndroidView.arenaHeight/2));
     }
 
     /** Reset the x, y position of the flying android. */

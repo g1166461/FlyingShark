@@ -110,8 +110,6 @@ public class FlyingAndroidView extends SurfaceView {
                     background.stop(false);
                     ((AnimationDrawable)(flyingAndroid.getDrawable())).start();
 
-
-
                 }
                 else if(gameOver){/*Restart Game*/
                     //Check if the x and y position of the touch is inside the bitmap
@@ -196,11 +194,10 @@ public class FlyingAndroidView extends SurfaceView {
                 for (int i = 0; i < obstacles.size(); i++) {
                     obstacles.get(i).drawOn(canvas);
                 }
-
-                // c. Draw the flying android
-                flyingAndroid.drawOn(canvas);
                 killer.drawOn(canvas);
                 fog.drawOn(canvas);
+                // c. Draw the flying android
+                flyingAndroid.drawOn(canvas);
                 // d. Draw game text
                 drawGameText(canvas);
 
@@ -300,7 +297,6 @@ public class FlyingAndroidView extends SurfaceView {
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
         float timeDiff = gameTime - fogCreationTime;
         if (fogCreationTime == -1 || timeDiff > 25000) {
-            System.out.println("hello");
             fogCreationTime = gameTime;
             fog=new Fog(context);
         }
@@ -355,8 +351,8 @@ public class FlyingAndroidView extends SurfaceView {
             background = new Background(context);
             flyingAndroid = new FlyingAndroid(this, context);
         }
-        fog=new Fog(context);
         killer=new Killer(context);
+        fog=new Fog(context);
         fogCreationTime=-1;
         gameOver = false;
         waitForTouch = true;
