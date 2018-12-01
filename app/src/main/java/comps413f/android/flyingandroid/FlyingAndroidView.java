@@ -72,7 +72,6 @@ public class FlyingAndroidView extends SurfaceView {
     private class UserInput {
         /** Whether there is a user input present. */
         boolean present = false;
-        int action;
         float x,y;
 
         /**
@@ -81,15 +80,8 @@ public class FlyingAndroidView extends SurfaceView {
          */
         synchronized void save(MotionEvent event) {
             present = true;
-            action=event.getAction();
             x=event.getX();
             y=event.getY();
-            if(present&&gameOver){/*Restart Game*/
-                //Check if the x and y position of the touch is inside the bitmap
-                if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150)){
-                    newGame(false);
-                }
-            }
         }
 
         /**
@@ -115,6 +107,12 @@ public class FlyingAndroidView extends SurfaceView {
 
 
 
+                }
+                else if(gameOver){/*Restart Game*/
+                    //Check if the x and y position of the touch is inside the bitmap
+                    if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150)){
+                        newGame(false);
+                    }
                 }
                 else {  // Game active
                     flyingAndroid.fly();
