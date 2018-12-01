@@ -53,7 +53,6 @@ public class MainActivity extends Activity {
         if(musicPlayerLoop.isPlaying() == false){
             musicPlayerLoop.start();
         }
-        System.out.println("checkhaha onresume "+musicPlayerLoop.isPlaying()  );
         animationView.resume();
     }
 
@@ -72,9 +71,5 @@ public class MainActivity extends Activity {
         }
         musicPlayerLoop.release();
         //animationView.release();
-    }
-    protected void onStop() {
-        musicPlayerLoop.stop();
-        super.onStop();
     }
 }
