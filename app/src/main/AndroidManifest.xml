@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FlyingAndroidPrefActivity"
+            android:name=".SpinnerActivity"
             android:label="@string/preferences" >
         </activity>
     </application>

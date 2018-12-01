@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/difficulty_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficulity: " />
+
+        <Spinner
+            android:id="@+id/diffculty_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/sound_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sound: " />
+
+        <CheckBox
+            android:id="@+id/sound_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Turn On/Off" />
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/vibration_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sound: " />
+
+        <CheckBox
+            android:id="@+id/vibration_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Turn On/Off" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -5,6 +5,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class MainActivity extends Activity {
     /** The animation view. */
@@ -22,6 +24,9 @@ public class MainActivity extends Activity {
         musicPlayerLoop.setLooping(true);
         musicPlayerLoop.seekTo(0);
         musicPlayerLoop.setVolume(0.5f, 0.5f);
+
+
+
     }
 
     @Override

@@ -28,7 +28,7 @@ public class MenuActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.mainmenu_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private final Class<?>[] classes = { MainActivity.class, FlyingAndroidPrefActivity.class
+            private final Class<?>[] classes = { MainActivity.class, SpinnerActivity.class
                     };
 
             @Override
