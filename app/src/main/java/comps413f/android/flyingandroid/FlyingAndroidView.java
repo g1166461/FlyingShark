@@ -2,6 +2,7 @@ package comps413f.android.flyingandroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.media.AsyncPlayer;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -41,7 +43,6 @@ public class FlyingAndroidView extends SurfaceView {
     private Vector<Obstacles> obstacles = new Vector<Obstacles>();
     /** Scrolling background of the view. */
     Background background;
-
     /** Timer for the game loop. */
     private Timer timer = null;
 
@@ -63,10 +64,9 @@ public class FlyingAndroidView extends SurfaceView {
     private boolean gameOver;
     private Bitmap gameOverPicture;
     private Bitmap restartPicture;
-
+    private boolean isVibration;
     /**Pause Game*/
     private Bitmap pausePicture;
-
 
     /** Whether the game is paused and waiting for touching to start. */
     private boolean waitForTouch = true;
@@ -315,9 +315,10 @@ public class FlyingAndroidView extends SurfaceView {
         effect.vibrateOn = true;
         effect.soundOn = true;
         gameOver = true;
-
-        effect.vibrate();
-        effect.playSound(R.raw.beep);
+        if(isVibration) {
+            effect.vibrate();
+            effect.playSound(R.raw.beep);
+        }
         ((AnimationDrawable)(flyingAndroid.getDrawable())).stop();
         background.stop(true);
     }
@@ -374,7 +375,10 @@ public class FlyingAndroidView extends SurfaceView {
     public FlyingAndroidView(Context context) {
         super(context);
         this.context = context;
-
+        Resources res=getResources();
+        //come from the choice of FlyingAndroidPrefActivity//
+        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+        isVibration=prefs.getBoolean(res.getString(R.string.pref_vibration_key),res.getBoolean(R.bool.pref_vibration_default));
         setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -382,7 +386,6 @@ public class FlyingAndroidView extends SurfaceView {
                 return true;
             }
         });
-
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
