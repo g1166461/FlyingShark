@@ -55,7 +55,10 @@ public class FlyingAndroidView extends SurfaceView {
     private float totalTime = 0;
     /** Obstacle creation time. */
     private float obstacleCreationTime;
+    private float killerCreationTime;
+    private float fogCreationTime;
     private Killer killer;
+    private Fog fog;
     /** Whether the game is over. */
     private boolean gameOver;
     private Bitmap gameOverPicture;
@@ -72,6 +75,7 @@ public class FlyingAndroidView extends SurfaceView {
     private class UserInput {
         /** Whether there is a user input present. */
         boolean present = false;
+        int action;
         float x,y;
 
         /**
@@ -80,6 +84,7 @@ public class FlyingAndroidView extends SurfaceView {
          */
         synchronized void save(MotionEvent event) {
             present = true;
+            action=event.getAction();
             x=event.getX();
             y=event.getY();
         }
@@ -153,6 +158,7 @@ public class FlyingAndroidView extends SurfaceView {
                 // i. Create obstacles
                 createObstacles();
                 createKiller();
+                createFog();
                 // ii. Move the flying android
                 flyingAndroid.move();
 
@@ -180,6 +186,10 @@ public class FlyingAndroidView extends SurfaceView {
                     if (killer.collideWith(flyingAndroid)) {
                         gameOver();
                     }
+                    fog.move();
+                    if (fog.collideWith(flyingAndroid)) {
+                        gameOver();
+                    }
                 }
             }
 
@@ -197,6 +207,7 @@ public class FlyingAndroidView extends SurfaceView {
                 // c. Draw the flying android
                 flyingAndroid.drawOn(canvas);
                 killer.drawOn(canvas);
+                fog.drawOn(canvas);
                 // d. Draw game text
                 drawGameText(canvas);
 
@@ -235,7 +246,6 @@ public class FlyingAndroidView extends SurfaceView {
                     totalTime += (System.currentTimeMillis() - startTime);
                     startTime = 0;
                 }
-                count=0;
                 float gameTime = totalTime / 1000.0f;
                 textPaint.setTextSize(2 * TEXT_SIZE);
                 textPaint.setTextAlign(Paint.Align.CENTER);
@@ -269,25 +279,37 @@ public class FlyingAndroidView extends SurfaceView {
     }
 
     /** Create obstacles randomly. */
-    public void createObstacles() {
+    public boolean createObstacles() {
         // Add code here
         // Task 2: Create one pair of pipes for every 15-25s randomly
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
         float timeDiff = gameTime - obstacleCreationTime;
-        if (obstacleCreationTime == -1 || timeDiff > ((Math.random()*10000) + 5000)) {
+        if (obstacleCreationTime == -1 || timeDiff >  25000) {
             obstacleCreationTime = gameTime;
             Obstacles o = new Obstacles(context);
             obstacles.add(o);
         }
+        return true;
     }
     public void createKiller() {
         // Add code here
-        // Task 2: Create one pair of pipes for every 15-25s randomly
+        //  Create one killer for every 7-17s randomly
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
-        float timeDiff = gameTime - obstacleCreationTime;
-        if (obstacleCreationTime == -1 || timeDiff > ((Math.random()*10000) + 5000)) {
-            obstacleCreationTime = gameTime;
+        float timeDiff = gameTime - killerCreationTime;
+        if (killerCreationTime == -1 || timeDiff > ((Math.random()*10000)+7000)) {
+            killerCreationTime = gameTime;
             killer=new Killer(context);
+        }
+    }
+    public void createFog() {
+        // Add code here
+        // Task 2: Create fog for every 25s randomly
+        float gameTime = (System.currentTimeMillis() - startTime + totalTime);
+        float timeDiff = gameTime - fogCreationTime;
+        if (fogCreationTime == -1 || timeDiff > 25000) {
+            System.out.println("hello");
+            fogCreationTime = gameTime;
+            fog=new Fog(context);
         }
     }
 
@@ -340,12 +362,15 @@ public class FlyingAndroidView extends SurfaceView {
             background = new Background(context);
             flyingAndroid = new FlyingAndroid(this, context);
         }
+        fog=new Fog(context);
         killer=new Killer(context);
+        fogCreationTime=-1;
         gameOver = false;
         waitForTouch = true;
         totalTime = 0;
         startTime = -1;
         obstacleCreationTime = -1;
+        killerCreationTime=-1;
         obstacles.clear();
         flyingAndroid.reset();
 
