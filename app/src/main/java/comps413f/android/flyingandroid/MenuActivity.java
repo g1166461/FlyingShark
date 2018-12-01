@@ -18,10 +18,6 @@ public class MenuActivity extends Activity {
         setContentView(R.layout.mainmenu);
         Resources res = getResources();
         menus = res.getStringArray(R.array.mainmenu);
-        boolean changePause=getIntent().getBooleanExtra("changePause",false);
-        if(changePause){
-            menus[0]="Resume";
-        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 menus);
