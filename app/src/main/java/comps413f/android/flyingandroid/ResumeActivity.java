@@ -16,18 +16,14 @@ public class ResumeActivity extends Activity{
             super.onCreate(savedInstanceState);
             setContentView(R.layout.mainmenu);
             Resources res = getResources();
-            menus = res.getStringArray(R.array.mainmenu);
-            boolean changePause=getIntent().getBooleanExtra("changePause",false);
-            if(changePause){
-                menus[0]="Resume";
-            }
+            menus = res.getStringArray(R.array.resumemenu);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1,
                     menus);
             ListView listView = (ListView) findViewById(R.id.mainmenu_list);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                private final Class<?>[] classes = { MainActivity.class, SpinnerActivity.class
+                private final Class<?>[] classes = { MainActivity.class,
                 };
 
                 @Override
@@ -37,9 +33,6 @@ public class ResumeActivity extends Activity{
                         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         startActivity(intent);
                         finish();
-                    }
-                    if(position==1){
-                        startActivity(intent);
                     }
                 }
             });
