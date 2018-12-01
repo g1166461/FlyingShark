@@ -1,9 +1,11 @@
 package comps413f.android.flyingandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +26,7 @@ public class MenuActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.mainmenu_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private final Class<?>[] classes = { MainActivity.class, SpinnerActivity.class
+            private final Class<?>[] classes = { MainActivity.class, FlyingAndroidPrefActivity.class
                     };
 
             @Override
