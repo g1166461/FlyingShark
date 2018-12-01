@@ -64,9 +64,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        musicPlayerLoop.start();
-        if(musicPlayerLoop.isPlaying() == false){
+        if(animationView.isMusic) {
             musicPlayerLoop.start();
+            if (musicPlayerLoop.isPlaying() == false) {
+                musicPlayerLoop.start();
+            }
         }
         animationView.resume();
     }

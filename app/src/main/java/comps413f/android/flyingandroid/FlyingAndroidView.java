@@ -65,6 +65,7 @@ public class FlyingAndroidView extends SurfaceView {
     private Bitmap gameOverPicture;
     private Bitmap restartPicture;
     private boolean isVibration;
+    protected boolean isMusic;
     /**Pause Game*/
     private Bitmap pausePicture;
 
@@ -379,6 +380,7 @@ public class FlyingAndroidView extends SurfaceView {
         //come from the choice of FlyingAndroidPrefActivity//
         SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
         isVibration=prefs.getBoolean(res.getString(R.string.pref_vibration_key),res.getBoolean(R.bool.pref_vibration_default));
+        isMusic = prefs.getBoolean(res.getString(R.string.pref_sound_key),res.getBoolean(R.bool.pref_sound_default));
         setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
