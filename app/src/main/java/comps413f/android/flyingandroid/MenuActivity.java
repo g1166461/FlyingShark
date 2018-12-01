@@ -1,5 +1,6 @@
 package comps413f.android.flyingandroid;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -31,6 +32,14 @@ public class MenuActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).equals("About")){
+                    AlertDialog.Builder builderInner=new AlertDialog.Builder(MenuActivity.this);
+                    builderInner.setTitle(R.string.about_title);
+                    builderInner.setMessage(R.string.about_msg);
+                    builderInner.setNeutralButton(android.R.string.ok, null);
+                    builderInner.show();
+                }
+
                 Intent intent = new Intent(MenuActivity.this, classes[position]);
                 if(position==0) {
                     startActivity(intent);

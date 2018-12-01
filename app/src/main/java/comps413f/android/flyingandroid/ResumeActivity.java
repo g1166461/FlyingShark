@@ -1,6 +1,7 @@
 package comps413f.android.flyingandroid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -28,6 +29,13 @@ public class ResumeActivity extends Activity{
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if(parent.getItemAtPosition(position).equals("About")){
+                        AlertDialog.Builder builderInner=new AlertDialog.Builder(ResumeActivity.this);
+                        builderInner.setTitle(R.string.about_title);
+                        builderInner.setMessage(R.string.about_msg);
+                        builderInner.setNeutralButton(android.R.string.ok, null);
+                        builderInner.show();
+                    }
                     Intent intent = new Intent(ResumeActivity.this, classes[position]);
                     if(position==0) {
                         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
