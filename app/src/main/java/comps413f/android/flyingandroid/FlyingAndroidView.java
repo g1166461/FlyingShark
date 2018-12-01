@@ -55,7 +55,7 @@ public class FlyingAndroidView extends SurfaceView {
     private float totalTime = 0;
     /** Obstacle creation time. */
     private float obstacleCreationTime;
-
+    private Killer killer;
     /** Whether the game is over. */
     private boolean gameOver;
     private Bitmap gameOverPicture;
@@ -154,7 +154,7 @@ public class FlyingAndroidView extends SurfaceView {
 
                 // i. Create obstacles
                 createObstacles();
-
+                createKiller();
                 // ii. Move the flying android
                 flyingAndroid.move();
 
@@ -178,6 +178,10 @@ public class FlyingAndroidView extends SurfaceView {
                         if (obstacles.get(i).isOutOfArena())
                             obstacles.remove(i);
                     }
+                    killer.move();
+                    if (killer.collideWith(flyingAndroid)) {
+                        gameOver();
+                    }
                 }
             }
 
@@ -194,7 +198,7 @@ public class FlyingAndroidView extends SurfaceView {
 
                 // c. Draw the flying android
                 flyingAndroid.drawOn(canvas);
-
+                killer.drawOn(canvas);
                 // d. Draw game text
                 drawGameText(canvas);
 
@@ -272,10 +276,20 @@ public class FlyingAndroidView extends SurfaceView {
         // Task 2: Create one pair of pipes for every 15-25s randomly
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
         float timeDiff = gameTime - obstacleCreationTime;
-        if (obstacleCreationTime == -1 || timeDiff > ((Math.random()*10000) + 15000)) {
+        if (obstacleCreationTime == -1 || timeDiff > ((Math.random()*10000) + 5000)) {
             obstacleCreationTime = gameTime;
             Obstacles o = new Obstacles(context);
             obstacles.add(o);
+        }
+    }
+    public void createKiller() {
+        // Add code here
+        // Task 2: Create one pair of pipes for every 15-25s randomly
+        float gameTime = (System.currentTimeMillis() - startTime + totalTime);
+        float timeDiff = gameTime - obstacleCreationTime;
+        if (obstacleCreationTime == -1 || timeDiff > ((Math.random()*10000) + 5000)) {
+            obstacleCreationTime = gameTime;
+            killer=new Killer(context);
         }
     }
 
@@ -328,7 +342,7 @@ public class FlyingAndroidView extends SurfaceView {
             background = new Background(context);
             flyingAndroid = new FlyingAndroid(this, context);
         }
-
+        killer=new Killer(context);
         gameOver = false;
         waitForTouch = true;
         totalTime = 0;
