@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.app.AlertDialog;
 
 public class MainActivity extends Activity {
     /** The animation view. */
@@ -46,6 +47,15 @@ public class MainActivity extends Activity {
         case R.id.action_restart:
             animationView.newGame(false);
             break;
+
+            case R.id.about:
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.about_title)
+                        .setMessage(R.string.about_msg)
+                        .setNeutralButton(android.R.string.ok, null)
+                        .show();
+                break;
+
         }
         return false;
     }

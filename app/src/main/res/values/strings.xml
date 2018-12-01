@@ -4,6 +4,7 @@
     <string name="app_name">FlyingAndroid</string>
     <string name="action_restart">Restart</string>
     <string name="hello_world">Hello world!</string>
+    <string name="about">About</string>
 
     <string name="time_elapse">"Time: %1$.1fs"</string>
     <string name="game_over">Game Over!</string>
@@ -24,6 +25,9 @@
     <string name="pref_splash_title">Splash screen</string>
     <string name="pref_vibration_summary">Turn on/off vibration</string>
     <string name="pref_sound_summary">Turn on/off music</string>
+    <string name="about_title">Rules of this game</string>
+    <string name="about_msg">Avoid to touch those obstacles! If you fails to do, it will game over!</string>
+
 
     <string-array name="category_names">
         <item>Easy</item>
