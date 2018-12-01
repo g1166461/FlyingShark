@@ -44,4 +44,8 @@
         <item>Preferences</item>
         <item>About</item>
     </string-array>
+    <string-array name="resumemenu">
+        <item>Resume</item>
+        <item>About</item>
+    </string-array>
 </resources>
