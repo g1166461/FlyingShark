@@ -35,7 +35,6 @@ public class MenuActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MenuActivity.this, classes[position]);
                 if(position==0) {
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(intent);
                 }
                 if(position==1){

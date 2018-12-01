@@ -25,6 +25,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ResumeActivity"
+            android:label="Resume" >
+        </activity>
+        <activity
             android:name=".SpinnerActivity"
             android:label="@string/preferences" >
         </activity>
