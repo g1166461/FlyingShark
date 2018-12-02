@@ -3,7 +3,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
-public class FlyingAndroidPrefActivity extends PreferenceActivity {
+public class FlyingSharkPrefActivity extends PreferenceActivity {
 
     /** Preference activity for showing the preference screen */
 

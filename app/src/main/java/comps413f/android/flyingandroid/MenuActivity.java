@@ -27,7 +27,7 @@ public class MenuActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.mainmenu_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private final Class<?>[] classes = { MainActivity.class, FlyingAndroidPrefActivity.class,
+            private final Class<?>[] classes = { MainActivity.class, FlyingSharkPrefActivity.class,
                     AboutActivity.class,ClearActivity.class};
 
             @Override
@@ -48,6 +48,7 @@ public class MenuActivity extends Activity {
                     builderInner.setMessage(R.string.about_cleardata_msg);
                     builderInner.setNeutralButton(android.R.string.ok, null);
                     builderInner.show();
+                }
 
                 Intent intent = new Intent(MenuActivity.this, classes[position]);
                 if(position==0) {
