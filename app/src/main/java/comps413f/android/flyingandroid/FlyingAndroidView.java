@@ -56,10 +56,14 @@ public class FlyingAndroidView extends SurfaceView {
     private float totalTime = 0;
     /** Obstacle creation time. */
     private float obstacleCreationTime;
+    /** Killer creation time. */
     private float killerCreationTime;
+    /** Fog creation time. */
     private float fogCreationTime;
+    private float bladeCreationTime;
     private Killer killer;
     private Fog fog;
+    private Blade blade;
     /** Whether the game is over. */
     private boolean gameOver;
     private Bitmap gameOverPicture;
@@ -68,7 +72,8 @@ public class FlyingAndroidView extends SurfaceView {
     protected boolean isMusic;
     /**Pause Game*/
     private Bitmap pausePicture;
-
+    /**Level Of  Game*/
+    private String level;
     /** Whether the game is paused and waiting for touching to start. */
     private boolean waitForTouch = true;
 
@@ -151,9 +156,9 @@ public class FlyingAndroidView extends SurfaceView {
                 createObstacles();
                 createKiller();
                 createFog();
+                createBlade();
                 // ii. Move the flying android
                 flyingAndroid.move();
-
                 // iii. If the flying android moved out from the arena, call method gameOver
                 if (flyingAndroid.isOutOfArena()) {
                     gameOver();
@@ -182,6 +187,10 @@ public class FlyingAndroidView extends SurfaceView {
                     if (fog.collideWith(flyingAndroid)) {
                         gameOver();
                     }
+                    blade.move();
+                    if (blade.collideWith(flyingAndroid)) {
+                        gameOver();
+                    }
                 }
             }
 
@@ -197,6 +206,7 @@ public class FlyingAndroidView extends SurfaceView {
                 }
                 killer.drawOn(canvas);
                 fog.drawOn(canvas);
+                blade.drawOn(canvas);
                 // c. Draw the flying android
                 flyingAndroid.drawOn(canvas);
                 // d. Draw game text
@@ -302,6 +312,14 @@ public class FlyingAndroidView extends SurfaceView {
             fog=new Fog(context);
         }
     }
+    public void createBlade(){
+        float gameTime = (System.currentTimeMillis() - startTime + totalTime);
+        float timeDiff = gameTime - bladeCreationTime;
+        if (bladeCreationTime == -1 || timeDiff > ((Math.random()*10000)+5000)) {
+            bladeCreationTime = gameTime;
+            blade=new Blade(context);
+        }
+    }
 
     /** Game over. */
     public void gameOver() {
@@ -355,6 +373,7 @@ public class FlyingAndroidView extends SurfaceView {
         }
         killer=new Killer(context);
         fog=new Fog(context);
+        blade=new Blade(context);
         fogCreationTime=-1;
         gameOver = false;
         waitForTouch = true;
@@ -362,6 +381,7 @@ public class FlyingAndroidView extends SurfaceView {
         startTime = -1;
         obstacleCreationTime = -1;
         killerCreationTime=-1;
+        bladeCreationTime = -1;
         obstacles.clear();
         flyingAndroid.reset();
 
@@ -381,6 +401,8 @@ public class FlyingAndroidView extends SurfaceView {
         SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
         isVibration=prefs.getBoolean(res.getString(R.string.pref_vibration_key),res.getBoolean(R.bool.pref_vibration_default));
         isMusic = prefs.getBoolean(res.getString(R.string.pref_sound_key),res.getBoolean(R.bool.pref_sound_default));
+        level=prefs.getString(getResources().getString(R.string.category_key),getResources().getString(R.string.category_default));
+        System.out.println(level);
         setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
