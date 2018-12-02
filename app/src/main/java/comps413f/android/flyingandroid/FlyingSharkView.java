@@ -442,7 +442,6 @@ public class FlyingSharkView extends SurfaceView {
         isVibration=prefs.getBoolean(res.getString(R.string.pref_vibration_key),res.getBoolean(R.bool.pref_vibration_default));
         isMusic = prefs.getBoolean(res.getString(R.string.pref_sound_key),res.getBoolean(R.bool.pref_sound_default));
         level=prefs.getString(getResources().getString(R.string.category_key),getResources().getString(R.string.category_default));
-        System.out.println(level);
         setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

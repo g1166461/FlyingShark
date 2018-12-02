@@ -12,7 +12,7 @@
     <string name="title_activity_menu">FlyingShark</string>
     <string name="game_settings">Game settings</string>
     <string name="category_key">category</string>
-    <string name="category_default">0</string>
+    <string name="category_default">Easy</string>
     <string name="category_title">Category</string>
     <string name="category_summary">Difficulty</string>
     <string name="vibration_settings">Vibration</string>
