@@ -27,6 +27,7 @@
     <string name="pref_sound_summary">Turn on/off music</string>
     <string name="about_title">Rules of this game</string>
     <string name="about_msg">Avoid to touch those obstacles! If you fails to do, it will game over!</string>
+    <string name="highestTime">"Current Highest Time: %1$.1fs"</string>
 
 
     <string-array name="category_names">
@@ -35,9 +36,9 @@
         <item>Hard</item>
     </string-array>
     <string-array name="category_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
     </string-array>
     <string-array name="mainmenu">
         <item>New game</item>

@@ -262,7 +262,17 @@ public class FlyingAndroidView extends SurfaceView {
                 r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
                 canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(context);
+                SharedPreferences.Editor editor = saved_values.edit();
+                float nextTime = gameTime;
+                if(nextTime > saved_values.getFloat("time",0)) {
+                    editor.putFloat("time", nextTime);
+                    editor.apply();
+                }
 
+                /*get  highest time*/
+                float previous = saved_values.getFloat("time",0);
+                canvas.drawText(res.getString(R.string.highestTime, previous ), getWidth() / 2, getHeight() /3 + (2 * TEXT_SIZE), textPaint);
 
             }
             else if (waitForTouch) {
