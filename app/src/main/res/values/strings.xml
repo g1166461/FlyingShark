@@ -30,8 +30,11 @@
     <string name="about_cleardata_title">Clear Highest Time Record</string>
     <string name="about_cleardata_msg">Your highest time record have been cleared!</string>
     <string name="highestTime">"Current Highest Time: %1$.1fs"</string>
-
-
+    <string name="splash_text">Welcome to FlyingShark!!</string>
+    <string name="touch_to_continue">Touch to continue</string>
+    <string name="pref_splash_key">splash</string>
+    <bool name="pref_splash_default">true</bool>
+    <string name="pref_splash_summary">Display the splash screen when launching the game</string>
     <string-array name="category_names">
         <item>Easy</item>
         <item>Medium</item>
