@@ -5,12 +5,12 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable.Callback;
 
 /** The flying android. */
-public class FlyingAndroid extends Sprite {
+public class FlyingShark extends Sprite {
     private static final float INITIAL_DY = 5;  // Initial velocity in vertical direction
     private float dy;  // y velocity of the flying android object
 
     /** Constructor. */
-    public FlyingAndroid(Callback callback, Context context) {
+    public FlyingShark(Callback callback, Context context) {
         drawable = (AnimationDrawable) context.getResources().getDrawable(R.drawable.flying_android);
         drawable.setCallback(callback);
         dy = INITIAL_DY;

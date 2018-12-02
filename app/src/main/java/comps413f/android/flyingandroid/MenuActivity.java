@@ -48,7 +48,6 @@ public class MenuActivity extends Activity {
                     builderInner.setMessage(R.string.about_cleardata_msg);
                     builderInner.setNeutralButton(android.R.string.ok, null);
                     builderInner.show();
-                }
 
                 Intent intent = new Intent(MenuActivity.this, classes[position]);
                 if(position==0) {

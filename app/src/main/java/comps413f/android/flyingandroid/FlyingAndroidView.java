@@ -38,7 +38,7 @@ public class FlyingAndroidView extends SurfaceView {
     private Rect r=new Rect();
     private Rect r2=new Rect();
     /** Animation object, the flying android. */
-    private FlyingAndroid flyingAndroid;
+    private FlyingShark flyingShark;
     /** List of obstacles objects, i.e., pairs of pipes. */
     private Vector<Obstacles> obstacles = new Vector<Obstacles>();
     /** Scrolling background of the view. */
@@ -115,7 +115,7 @@ public class FlyingAndroidView extends SurfaceView {
                     waitForTouch = false;
                     startTime = System.currentTimeMillis();
                     background.stop(false);
-                    ((AnimationDrawable)(flyingAndroid.getDrawable())).start();
+                    ((AnimationDrawable)(flyingShark.getDrawable())).start();
 
                 }
                 else if(gameOver){/*Restart Game*/
@@ -125,7 +125,7 @@ public class FlyingAndroidView extends SurfaceView {
                     }
                 }
                 else {  // Game active
-                    flyingAndroid.fly();
+                    flyingShark.fly();
                             //Pause Game
                             if(!gameOver) {
                                 if (x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20 + 100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20 + 100)) {
@@ -163,9 +163,9 @@ public class FlyingAndroidView extends SurfaceView {
                     createBlade();
                 }
                 // ii. Move the flying android
-                flyingAndroid.move();
+                flyingShark.move();
                 // iii. If the flying android moved out from the arena, call method gameOver
-                if (flyingAndroid.isOutOfArena()) {
+                if (flyingShark.isOutOfArena()) {
                     gameOver();
                 }
                 else {
@@ -174,7 +174,7 @@ public class FlyingAndroidView extends SurfaceView {
                         // a. Move the obstacles
                         obstacles.get(i).move();
                         // b. Determine if the flying android collided with any obstacle
-                        if (obstacles.get(i).collideWith(flyingAndroid)) {
+                        if (obstacles.get(i).collideWith(flyingShark)) {
                             gameOver();
                             break;
                         }
@@ -185,17 +185,17 @@ public class FlyingAndroidView extends SurfaceView {
                     }
                     if(level.equals("Medium")||level.equals("Hard")) {
                         killer.move();
-                        if (killer.collideWith(flyingAndroid)) {
+                        if (killer.collideWith(flyingShark)) {
                             gameOver();
                         }
                     }
                     if(level.equals("Hard")) {
                         fog.move();
-                        if (fog.collideWith(flyingAndroid)) {
+                        if (fog.collideWith(flyingShark)) {
                             gameOver();
                         }
                         blade.move();
-                        if (blade.collideWith(flyingAndroid)) {
+                        if (blade.collideWith(flyingShark)) {
                             gameOver();
                         }
                     }
@@ -220,7 +220,7 @@ public class FlyingAndroidView extends SurfaceView {
                     blade.drawOn(canvas);
                 }
                 // c. Draw the flying android
-                flyingAndroid.drawOn(canvas);
+                flyingShark.drawOn(canvas);
                 // d. Draw game text
                 drawGameText(canvas);
 
@@ -375,7 +375,7 @@ public class FlyingAndroidView extends SurfaceView {
             effect.vibrate();
             effect.playSound(R.raw.beep);
         }
-        ((AnimationDrawable)(flyingAndroid.getDrawable())).stop();
+        ((AnimationDrawable)(flyingShark.getDrawable())).stop();
         background.stop(true);
     }
 
@@ -392,7 +392,7 @@ public class FlyingAndroidView extends SurfaceView {
         waitForTouch = true;
 
         background.stop(true);
-        ((AnimationDrawable) (flyingAndroid.getDrawable())).stop();
+        ((AnimationDrawable) (flyingShark.getDrawable())).stop();
         timer.cancel();
         timer = null;
     }
@@ -405,7 +405,7 @@ public class FlyingAndroidView extends SurfaceView {
             arenaWidth = getWidth();
             arenaHeight = getHeight();
             background = new Background(context);
-            flyingAndroid = new FlyingAndroid(this, context);
+            flyingShark = new FlyingShark(this, context);
         }
         if(level.equals("Medium")||level.equals("Hard")) {
             killer = new Killer(context);
@@ -423,9 +423,9 @@ public class FlyingAndroidView extends SurfaceView {
         startTime = -1;
         obstacleCreationTime = -1;
         obstacles.clear();
-        flyingAndroid.reset();
+        flyingShark.reset();
 
-        ((AnimationDrawable)(flyingAndroid.getDrawable())).stop();
+        ((AnimationDrawable)(flyingShark.getDrawable())).stop();
         background.stop(true);
     }
 
@@ -463,7 +463,7 @@ public class FlyingAndroidView extends SurfaceView {
 
     protected boolean verifyDrawable(Drawable who) {
         super.verifyDrawable(who);
-        return who == flyingAndroid.getDrawable();
+        return who == flyingShark.getDrawable();
     }
 
     public void invalidateDrawable(Drawable drawable) {
