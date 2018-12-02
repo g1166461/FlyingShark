@@ -268,7 +268,7 @@ public class FlyingSharkView extends SurfaceView {
                 restartPicture= Bitmap.createScaledBitmap(restartPicture, scaledWidth2, scaledHeight2, true);
                 r.set((FlyingSharkView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingSharkView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingSharkView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingSharkView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
                 canvas.drawBitmap(restartPicture, null, r, textPaint);
-                canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
+                canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() /2, getHeight() /2 + (scaledHeight/2), textPaint);
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = saved_values.edit();
                 float nextTime = gameTime;
@@ -287,10 +287,10 @@ public class FlyingSharkView extends SurfaceView {
                 canvas.drawText(res.getString(R.string.start), getWidth() / 2, getHeight() / 2, textPaint);
             }
             else {
-                textPaint.setTextSize(TEXT_SIZE);
+                textPaint.setTextSize(TEXT_SIZE*3);
                 textPaint.setTextAlign(Paint.Align.LEFT);
                 float gameTime = (System.currentTimeMillis() - startTime + totalTime) / 1000.0f;
-                canvas.drawText(res.getString(R.string.time_elapse, gameTime), TEXT_SIZE, TEXT_SIZE, textPaint);
+                canvas.drawText(res.getString(R.string.time_elapse, gameTime), TEXT_SIZE*3, TEXT_SIZE*3, textPaint);
             }
         }
     }
