@@ -154,9 +154,13 @@ public class FlyingAndroidView extends SurfaceView {
 
                 // i. Create obstacles
                 createObstacles();
-                createKiller();
-                createFog();
-                createBlade();
+                if(level.equals("Medium")||level.equals("Hard")) {
+                    createKiller();
+                }
+                if(level.equals("Hard")) {
+                    createFog();
+                    createBlade();
+                }
                 // ii. Move the flying android
                 flyingAndroid.move();
                 // iii. If the flying android moved out from the arena, call method gameOver
@@ -168,7 +172,6 @@ public class FlyingAndroidView extends SurfaceView {
                     for (int i = 0; i < obstacles.size(); i++) {
                         // a. Move the obstacles
                         obstacles.get(i).move();
-
                         // b. Determine if the flying android collided with any obstacle
                         if (obstacles.get(i).collideWith(flyingAndroid)) {
                             gameOver();
@@ -179,17 +182,21 @@ public class FlyingAndroidView extends SurfaceView {
                         if (obstacles.get(i).isOutOfArena())
                             obstacles.remove(i);
                     }
-                    killer.move();
-                    if (killer.collideWith(flyingAndroid)) {
-                        gameOver();
+                    if(level.equals("Medium")||level.equals("Hard")) {
+                        killer.move();
+                        if (killer.collideWith(flyingAndroid)) {
+                            gameOver();
+                        }
                     }
-                    fog.move();
-                    if (fog.collideWith(flyingAndroid)) {
-                        gameOver();
-                    }
-                    blade.move();
-                    if (blade.collideWith(flyingAndroid)) {
-                        gameOver();
+                    if(level.equals("Hard")) {
+                        fog.move();
+                        if (fog.collideWith(flyingAndroid)) {
+                            gameOver();
+                        }
+                        blade.move();
+                        if (blade.collideWith(flyingAndroid)) {
+                            gameOver();
+                        }
                     }
                 }
             }
@@ -204,9 +211,13 @@ public class FlyingAndroidView extends SurfaceView {
                 for (int i = 0; i < obstacles.size(); i++) {
                     obstacles.get(i).drawOn(canvas);
                 }
-                killer.drawOn(canvas);
-                fog.drawOn(canvas);
-                blade.drawOn(canvas);
+                if(level.equals("Medium")||level.equals("Hard")) {
+                    killer.drawOn(canvas);
+                }
+                if(level.equals("Hard")) {
+                    fog.drawOn(canvas);
+                    blade.drawOn(canvas);
+                }
                 // c. Draw the flying android
                 flyingAndroid.drawOn(canvas);
                 // d. Draw game text
@@ -295,21 +306,37 @@ public class FlyingAndroidView extends SurfaceView {
         // Task 2: Create one pair of pipes for every 15-25s randomly
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
         float timeDiff = gameTime - obstacleCreationTime;
-        if (obstacleCreationTime == -1 || timeDiff >  25000) {
-            obstacleCreationTime = gameTime;
-            Obstacles o = new Obstacles(context);
-            obstacles.add(o);
+        if(level.equals("Easy")) {
+            //Create one obstacles for every 10s
+            if (obstacleCreationTime == -1 || timeDiff > 10000) {
+                obstacleCreationTime = gameTime;
+                Obstacles o = new Obstacles(context);
+                obstacles.add(o);
+            }
+        }
+        if(level.equals("Medium")||level.equals("Hard")) {
+            //Create one obstacles for every 3s
+            if (obstacleCreationTime == -1 || timeDiff > 3000) {
+                obstacleCreationTime = gameTime;
+                Obstacles o = new Obstacles(context);
+                //let the player have more time to prepare the obstacles
+                o.increaseSpeed();
+                obstacles.add(o);
+            }
         }
         return true;
     }
     public void createKiller() {
         // Add code here
-        //  Create one killer for every 7-17s randomly
+        //  Create one killer for every 5-15s randomly
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
         float timeDiff = gameTime - killerCreationTime;
-        if (killerCreationTime == -1 || timeDiff > ((Math.random()*10000)+7000)) {
-            killerCreationTime = gameTime;
-            killer=new Killer(context);
+        if(level.equals("Medium")||level.equals("Hard")) {
+            if (killerCreationTime == -1 || timeDiff > ((Math.random() * 10000) + 5000)) {
+                killerCreationTime = gameTime;
+                killer = new Killer(context);
+                killer.increaseSpeed();
+            }
         }
     }
     public void createFog() {
@@ -317,7 +344,7 @@ public class FlyingAndroidView extends SurfaceView {
         // Task 2: Create fog for every 25s randomly
         float gameTime = (System.currentTimeMillis() - startTime + totalTime);
         float timeDiff = gameTime - fogCreationTime;
-        if (fogCreationTime == -1 || timeDiff > 25000) {
+        if (fogCreationTime == -1 || timeDiff > 15000) {
             fogCreationTime = gameTime;
             fog=new Fog(context);
         }
@@ -381,17 +408,21 @@ public class FlyingAndroidView extends SurfaceView {
             background = new Background(context);
             flyingAndroid = new FlyingAndroid(this, context);
         }
-        killer=new Killer(context);
-        fog=new Fog(context);
-        blade=new Blade(context);
-        fogCreationTime=-1;
+        if(level.equals("Medium")||level.equals("Hard")) {
+            killer = new Killer(context);
+            killerCreationTime=-1;
+        }
+        if(level.equals("Hard")) {
+            fog = new Fog(context);
+            blade = new Blade(context);
+            fogCreationTime = -1;
+            bladeCreationTime = -1;
+        }
         gameOver = false;
         waitForTouch = true;
         totalTime = 0;
         startTime = -1;
         obstacleCreationTime = -1;
-        killerCreationTime=-1;
-        bladeCreationTime = -1;
         obstacles.clear();
         flyingAndroid.reset();
 

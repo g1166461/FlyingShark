@@ -15,8 +15,8 @@ public class Obstacles {
         // Add code here
         // Task 1: Create a pair of obstacles
         // i. Randomize the distance between upper and lower obstacles
-        int minDistance = (int) (0.3 * FlyingAndroidView.arenaHeight);
-        int maxDistance = (int) (0.4 * FlyingAndroidView.arenaHeight);
+        int minDistance = (int) (0.4* FlyingAndroidView.arenaHeight);
+        int maxDistance = (int) (0.6 * FlyingAndroidView.arenaHeight);
         int distance = minDistance + (int) (Math.random() * (maxDistance - minDistance));
 
         // ii. Randomize y position of the upper obstacle
@@ -30,7 +30,11 @@ public class Obstacles {
         obstacles[1] = new Obstacle(context, R.drawable.obstacle_lower);
         obstacles[1].setPosition(x, y + distance);
     }
-
+    public void increaseSpeed(){
+        for (Obstacle obstacle:obstacles) {
+            obstacle.increaseSpeed();
+        }
+    }
     /** Move the obstacles. */
     public void move() {
         for (Obstacle obstacle:obstacles) {
@@ -70,7 +74,6 @@ public class Obstacles {
         public Obstacle(Context context, int resId) {
             drawable = context.getResources().getDrawable(resId);
         }
-
         @Override
         /** Move the obstacle. */
         public void move() {
@@ -81,6 +84,9 @@ public class Obstacles {
                 // Update the boundary of the obstacle drawable
                 updateBounds();
             }
+        }
+        public void increaseSpeed(){
+            dx-=5;
         }
 
         @Override

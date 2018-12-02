@@ -27,7 +27,9 @@ public class Killer extends Sprite {
         dx = Background.SpeedXMagnitude-2;
         setPosition(FlyingAndroidView.arenaWidth,(float)(Math.random()*2)*(FlyingAndroidView.arenaHeight/2));
     }
-
+    public void increaseSpeed(){
+        dx-=3;
+    }
     /** Reset the x, y position of the flying android. */
 
 
