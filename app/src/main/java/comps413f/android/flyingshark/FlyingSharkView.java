@@ -1,4 +1,4 @@
-package comps413f.android.flyingandroid;
+package comps413f.android.flyingshark;
 
 import android.content.Context;
 import android.content.Intent;

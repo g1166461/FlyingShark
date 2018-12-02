@@ -1,13 +1,8 @@
-package comps413f.android.flyingandroid;
+package comps413f.android.flyingshark;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.app.AlertDialog;
 
 public class MainActivity extends Activity {
     /** The animation view. */
