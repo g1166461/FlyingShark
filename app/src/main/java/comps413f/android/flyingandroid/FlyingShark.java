@@ -11,7 +11,7 @@ public class FlyingShark extends Sprite {
 
     /** Constructor. */
     public FlyingShark(Callback callback, Context context) {
-        drawable = (AnimationDrawable) context.getResources().getDrawable(R.drawable.flying_android);
+        drawable = (AnimationDrawable) context.getResources().getDrawable(R.drawable.flying_shark);
         drawable.setCallback(callback);
         dy = INITIAL_DY;
     }
