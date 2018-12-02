@@ -29,8 +29,6 @@ public class MainActivity extends Activity {
 
 
     }
-
-
     /** Resumes the animation. This method is called when the activity is resumed. */
     @Override
     protected void onResume() {

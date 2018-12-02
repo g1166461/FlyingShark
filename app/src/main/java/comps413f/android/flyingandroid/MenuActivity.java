@@ -27,8 +27,8 @@ public class MenuActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.mainmenu_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            private final Class<?>[] classes = { MainActivity.class, FlyingAndroidPrefActivity.class
-                    };
+            private final Class<?>[] classes = { MainActivity.class, FlyingAndroidPrefActivity.class,
+                    AboutActivity.class,ClearActivity.class};
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -36,6 +36,16 @@ public class MenuActivity extends Activity {
                     AlertDialog.Builder builderInner=new AlertDialog.Builder(MenuActivity.this);
                     builderInner.setTitle(R.string.about_title);
                     builderInner.setMessage(R.string.about_msg);
+                    builderInner.setNeutralButton(android.R.string.ok, null);
+                    builderInner.show();
+                }
+                if(parent.getItemAtPosition(position).equals("Clear Highest Time Record")){
+                    SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(MenuActivity.this);
+                    SharedPreferences.Editor editor = saved_values.edit();
+                    editor.remove("time").apply();
+                    AlertDialog.Builder builderInner=new AlertDialog.Builder(MenuActivity.this);
+                    builderInner.setTitle(R.string.about_cleardata_title);
+                    builderInner.setMessage(R.string.about_cleardata_msg);
                     builderInner.setNeutralButton(android.R.string.ok, null);
                     builderInner.show();
                 }
