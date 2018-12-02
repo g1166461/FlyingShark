@@ -15,12 +15,12 @@ public class Fog extends Sprite {
     public Fog(Context context) {
 
         fogPicture=BitmapFactory.decodeResource(context.getResources(), R.drawable.fog);
-        int scaledWidth = (int) (fogPicture.getWidth() * (FlyingAndroidView.arenaHeight / (float) fogPicture.getHeight()))/2;
-        fogPicture = Bitmap.createScaledBitmap(fogPicture, scaledWidth, FlyingAndroidView.arenaHeight/3, true);
+        int scaledWidth = (int) (fogPicture.getWidth() * (FlyingSharkView.arenaHeight / (float) fogPicture.getHeight()))/2;
+        fogPicture = Bitmap.createScaledBitmap(fogPicture, scaledWidth, FlyingSharkView.arenaHeight/3, true);
         modifiedPicture=new BitmapDrawable(context.getResources(),fogPicture);
         drawable = modifiedPicture;
         dx = INITIAL_DX;
-        setPosition(-300,(float)(Math.random()*2)*(FlyingAndroidView.arenaHeight/2));
+        setPosition(-300,(float)(Math.random()*2)*(FlyingSharkView.arenaHeight/2));
     }
 
     /** Reset the x, y position of the flying android. */
@@ -42,7 +42,7 @@ public class Fog extends Sprite {
     @Override
     /** Evaluate if the flying android is moving out of the arena, i.e., game end. */
     public boolean isOutOfArena() {
-        if (curPos.y < 0 || curPos.y > FlyingAndroidView.arenaHeight - getHeight())
+        if (curPos.y < 0 || curPos.y > FlyingSharkView.arenaHeight - getHeight())
             return true;
         return false;
     }

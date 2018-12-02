@@ -10,18 +10,18 @@ public class Obstacles {
 
     /** Constructor. */
     public Obstacles(Context context) {
-        int x = FlyingAndroidView.arenaWidth;
+        int x = FlyingSharkView.arenaWidth;
 
         // Add code here
         // Task 1: Create a pair of obstacles
         // i. Randomize the distance between upper and lower obstacles
-        int minDistance = (int) (0.4* FlyingAndroidView.arenaHeight);
-        int maxDistance = (int) (0.6 * FlyingAndroidView.arenaHeight);
+        int minDistance = (int) (0.4* FlyingSharkView.arenaHeight);
+        int maxDistance = (int) (0.6 * FlyingSharkView.arenaHeight);
         int distance = minDistance + (int) (Math.random() * (maxDistance - minDistance));
 
         // ii. Randomize y position of the upper obstacle
-        int minY = (int) (0.1 * FlyingAndroidView.arenaHeight);
-        int maxY = (int) (0.9 * FlyingAndroidView.arenaHeight) - distance;
+        int minY = (int) (0.1 * FlyingSharkView.arenaHeight);
+        int maxY = (int) (0.9 * FlyingSharkView.arenaHeight) - distance;
         int y = minY + (int) (Math.random() * (maxY - minY));
 
         // iii. Upper and lower obstacles creation

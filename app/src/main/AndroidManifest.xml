@@ -30,7 +30,7 @@
             android:name=".SpinnerActivity"
             android:label="@string/preferences"></activity>
         <activity
-            android:name=".FlyingAndroidPrefActivity"
+            android:name=".FlyingSharkPrefActivity"
             android:label="@string/preferences"></activity>
     </application>
 

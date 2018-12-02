@@ -19,13 +19,13 @@ public class Killer extends Sprite {
 
         matrix.postRotate(270);
         killerPicture=BitmapFactory.decodeResource(context.getResources(), R.drawable.spaceship);
-        int scaledWidth = (int) (killerPicture.getWidth() * (FlyingAndroidView.arenaHeight / (float) killerPicture.getHeight()))/10;
-        killerPicture = Bitmap.createScaledBitmap(killerPicture, scaledWidth, FlyingAndroidView.arenaHeight/10, true);
-        killerRotatedPicture=Bitmap.createBitmap(killerPicture,0,0,scaledWidth,FlyingAndroidView.arenaHeight/10,matrix,true);
+        int scaledWidth = (int) (killerPicture.getWidth() * (FlyingSharkView.arenaHeight / (float) killerPicture.getHeight()))/10;
+        killerPicture = Bitmap.createScaledBitmap(killerPicture, scaledWidth, FlyingSharkView.arenaHeight/10, true);
+        killerRotatedPicture=Bitmap.createBitmap(killerPicture,0,0,scaledWidth,FlyingSharkView.arenaHeight/10,matrix,true);
         modifiedPicture=new BitmapDrawable(context.getResources(),killerRotatedPicture);
         drawable = modifiedPicture;
         dx = Background.SpeedXMagnitude-2;
-        setPosition(FlyingAndroidView.arenaWidth,(float)(Math.random()*2)*(FlyingAndroidView.arenaHeight/2));
+        setPosition(FlyingSharkView.arenaWidth,(float)(Math.random()*2)*(FlyingSharkView.arenaHeight/2));
     }
     public void increaseSpeed(){
         dx-=3;
@@ -49,7 +49,7 @@ public class Killer extends Sprite {
     @Override
     /** Evaluate if the flying android is moving out of the arena, i.e., game end. */
     public boolean isOutOfArena() {
-        if (curPos.y < 0 || curPos.y > FlyingAndroidView.arenaHeight - getHeight())
+        if (curPos.y < 0 || curPos.y > FlyingSharkView.arenaHeight - getHeight())
             return true;
         return false;
     }

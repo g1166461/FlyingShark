@@ -21,8 +21,8 @@ public class FlyingShark extends Sprite {
         // Add code here
         // Task 1: Reset the flying android
         // i. Locate it at the center of the arena 
-        float x = (FlyingAndroidView.arenaWidth - getWidth()) / 2.f;
-        float y = (FlyingAndroidView.arenaHeight - getHeight()) / 2.f;
+        float x = (FlyingSharkView.arenaWidth - getWidth()) / 2.f;
+        float y = (FlyingSharkView.arenaHeight - getHeight()) / 2.f;
 
         // ii. Update its position
         setPosition(x, y);
@@ -50,7 +50,7 @@ public class FlyingShark extends Sprite {
     @Override
     /** Evaluate if the flying android is moving out of the arena, i.e., game end. */
     public boolean isOutOfArena() {
-        if (curPos.y < 0 || curPos.y > FlyingAndroidView.arenaHeight - getHeight())
+        if (curPos.y < 0 || curPos.y > FlyingSharkView.arenaHeight - getHeight())
             return true;
         return false;
     }

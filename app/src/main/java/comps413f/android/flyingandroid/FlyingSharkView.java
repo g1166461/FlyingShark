@@ -26,7 +26,7 @@ import java.util.TimerTask;
 import java.util.Vector;
 
 /** View of flying android animation. */
-public class FlyingAndroidView extends SurfaceView {
+public class FlyingSharkView extends SurfaceView {
     /** Delay in each animation cycle, in ms. */
     private static final int CYCLE_DELAY = 30;
     /** Text size. */
@@ -120,7 +120,7 @@ public class FlyingAndroidView extends SurfaceView {
                 }
                 else if(gameOver){/*Restart Game*/
                     //Check if the x and y position of the touch is inside the bitmap
-                    if( x > ((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150)){
+                    if( x > ((FlyingSharkView.arenaWidth-restartPicture.getWidth()) / 2) && x < ((FlyingSharkView.arenaWidth-restartPicture.getWidth())/2+150) && y > ((FlyingSharkView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2) && y < ((FlyingSharkView.arenaHeight -restartPicture.getHeight())/2 +getWidth() / 2+150)){
                         newGame(false);
                     }
                 }
@@ -128,7 +128,7 @@ public class FlyingAndroidView extends SurfaceView {
                     flyingShark.fly();
                             //Pause Game
                             if(!gameOver) {
-                                if (x > ((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20 + 100) && y > ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20 + 100)) {
+                                if (x > ((FlyingSharkView.arenaWidth - pausePicture.getWidth()) / 20) && x < ((FlyingSharkView.arenaHeight - pausePicture.getWidth()) / 20 + 100) && y > ((FlyingSharkView.arenaHeight - pausePicture.getHeight()) / 20) && y < ((FlyingSharkView.arenaHeight - pausePicture.getHeight()) / 20 + 100)) {
                                         Intent intent = new Intent(context, ResumeActivity.class);
                                         intent.putExtra("changePause", true);
                                         context.startActivity(intent);
@@ -242,7 +242,7 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledWidth3 = pausePicture.getWidth() / 8;
                 int scaledHeight3 = pausePicture.getHeight() / 8;
                 pausePicture = Bitmap.createScaledBitmap(pausePicture, scaledWidth3, scaledHeight3, true);
-                r2.set((FlyingAndroidView.arenaWidth - pausePicture.getWidth()) / 20, (FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20, (FlyingAndroidView.arenaHeight - pausePicture.getWidth()) / 20+100, (FlyingAndroidView.arenaHeight - pausePicture.getHeight()) / 20+100);
+                r2.set((FlyingSharkView.arenaWidth - pausePicture.getWidth()) / 20, (FlyingSharkView.arenaHeight - pausePicture.getHeight()) / 20, (FlyingSharkView.arenaHeight - pausePicture.getWidth()) / 20+100, (FlyingSharkView.arenaHeight - pausePicture.getHeight()) / 20+100);
                 canvas.drawBitmap(pausePicture,null,r2,textPaint);
             }
 
@@ -261,12 +261,12 @@ public class FlyingAndroidView extends SurfaceView {
                 int scaledWidth = gameOverPicture.getWidth()/4;
                 int scaledHeight = gameOverPicture.getHeight()/4;
                 gameOverPicture = Bitmap.createScaledBitmap(gameOverPicture, scaledWidth, scaledHeight, true);
-                canvas.drawBitmap(gameOverPicture,(FlyingAndroidView.arenaWidth-gameOverPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -gameOverPicture.getHeight())/ 2, textPaint);
+                canvas.drawBitmap(gameOverPicture,(FlyingSharkView.arenaWidth-gameOverPicture.getWidth()) / 2, (FlyingSharkView.arenaHeight -gameOverPicture.getHeight())/ 2, textPaint);
                 restartPicture=BitmapFactory.decodeResource(context.getResources(), R.drawable.restart);
                 int scaledWidth2 = restartPicture.getWidth()/8;
                 int scaledHeight2 = restartPicture.getHeight()/8;
                 restartPicture= Bitmap.createScaledBitmap(restartPicture, scaledWidth2, scaledHeight2, true);
-                r.set((FlyingAndroidView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingAndroidView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingAndroidView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
+                r.set((FlyingSharkView.arenaWidth-restartPicture.getWidth()) / 2, (FlyingSharkView.arenaHeight -restartPicture.getHeight())/2+getWidth() / 2, (FlyingSharkView.arenaWidth-restartPicture.getWidth())/2+150, (FlyingSharkView.arenaHeight -restartPicture.getHeight())/2 + getWidth() / 2+150);
                 canvas.drawBitmap(restartPicture, null, r, textPaint);
                 canvas.drawText(res.getString(R.string.time_elapse, gameTime), getWidth() / 2, getHeight() / 2 + (scaledHeight/2), textPaint);
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(context);
@@ -433,7 +433,7 @@ public class FlyingAndroidView extends SurfaceView {
      * Constructs an animation view. This performs initialization including the
      * event handlers for key presses and touches.
      */
-    public FlyingAndroidView(Context context) {
+    public FlyingSharkView(Context context) {
         super(context);
         this.context = context;
         Resources res=getResources();

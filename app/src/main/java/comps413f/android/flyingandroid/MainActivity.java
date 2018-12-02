@@ -11,13 +11,13 @@ import android.app.AlertDialog;
 
 public class MainActivity extends Activity {
     /** The animation view. */
-    private FlyingAndroidView animationView;
+    private FlyingSharkView animationView;
     MediaPlayer musicPlayerLoop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        animationView = new FlyingAndroidView(this);
+        animationView = new FlyingSharkView(this);
         setContentView(animationView);
 
         musicPlayerLoop = MediaPlayer.create(getApplicationContext(), R.raw.background_music);
