@@ -54,6 +54,7 @@ public class FlyingAndroidView extends SurfaceView {
     private long pauseTime = 0;
     /** Total time elapsed of the game. */
     private float totalTime = 0;
+    private float gameTime =0;
     /** Obstacle creation time. */
     private float obstacleCreationTime;
     /** Killer creation time. */
@@ -254,11 +255,6 @@ public class FlyingAndroidView extends SurfaceView {
             // Else
             // - Draw the total time elapsed on the top left corner of the arena
             if (gameOver) {
-                if (startTime > 0) {
-                    totalTime += (System.currentTimeMillis() - startTime);
-                    startTime = 0;
-                }
-                float gameTime = totalTime / 1000.0f;
                 textPaint.setTextSize(2 * TEXT_SIZE);
                 textPaint.setTextAlign(Paint.Align.CENTER);
                 gameOverPicture=BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover);
@@ -284,7 +280,6 @@ public class FlyingAndroidView extends SurfaceView {
                 /*get  highest time*/
                 float previous = saved_values.getFloat("time",0);
                 canvas.drawText(res.getString(R.string.highestTime, previous ), getWidth() / 2, getHeight() /3 + (2 * TEXT_SIZE), textPaint);
-
             }
             else if (waitForTouch) {
                 textPaint.setTextSize(2 * TEXT_SIZE);
@@ -371,6 +366,11 @@ public class FlyingAndroidView extends SurfaceView {
         effect.vibrateOn = true;
         effect.soundOn = true;
         gameOver = true;
+        if (startTime > 0) {
+            totalTime += (System.currentTimeMillis() - startTime);
+            startTime = 0;
+        }
+         gameTime = totalTime / 1000.0f;
         if(isVibration) {
             effect.vibrate();
             effect.playSound(R.raw.beep);
@@ -393,7 +393,6 @@ public class FlyingAndroidView extends SurfaceView {
 
         background.stop(true);
         ((AnimationDrawable) (flyingAndroid.getDrawable())).stop();
-
         timer.cancel();
         timer = null;
     }

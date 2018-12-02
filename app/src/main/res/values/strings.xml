@@ -27,6 +27,8 @@
     <string name="pref_sound_summary">Turn on/off music</string>
     <string name="about_title">Rules of this game</string>
     <string name="about_msg">Avoid to touch those obstacles! If you fails to do, it will game over!</string>
+    <string name="about_cleardata_title">Clear Highest Time Record</string>
+    <string name="about_cleardata_msg">Your highest time record have been cleared!</string>
     <string name="highestTime">"Current Highest Time: %1$.1fs"</string>
 
 
@@ -44,6 +46,7 @@
         <item>New game</item>
         <item>Preferences</item>
         <item>About</item>
+        <item>Clear Highest Time Record</item>
     </string-array>
     <string-array name="resumemenu">
         <item>Resume</item>
