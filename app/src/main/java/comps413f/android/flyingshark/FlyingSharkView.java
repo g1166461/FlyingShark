@@ -184,19 +184,24 @@ public class FlyingSharkView extends SurfaceView {
                             obstacles.remove(i);
                     }
                     if(level.equals("Medium")||level.equals("Hard")) {
-                        killer.move();
-                        if (killer.collideWith(flyingShark)) {
-                            gameOver();
+                        if(killer!=null) {
+                            killer.move();
+                            if (killer.collideWith(flyingShark)) {
+                                gameOver();
+                            }
                         }
                     }
                     if(level.equals("Hard")) {
+                        if(fog!=null){
                         fog.move();
                         if (fog.collideWith(flyingShark)) {
                             gameOver();
-                        }
-                        blade.move();
-                        if (blade.collideWith(flyingShark)) {
-                            gameOver();
+                        }}
+                        if(blade!=null) {
+                            blade.move();
+                            if (blade.collideWith(flyingShark)) {
+                                gameOver();
+                            }
                         }
                     }
                 }
@@ -213,11 +218,17 @@ public class FlyingSharkView extends SurfaceView {
                     obstacles.get(i).drawOn(canvas);
                 }
                 if(level.equals("Medium")||level.equals("Hard")) {
-                    killer.drawOn(canvas);
+                    if(killer!=null) {
+                        killer.drawOn(canvas);
+                    }
                 }
                 if(level.equals("Hard")) {
-                    fog.drawOn(canvas);
-                    blade.drawOn(canvas);
+                    if(fog!=null) {
+                        fog.drawOn(canvas);
+                    }
+                    if(blade!=null) {
+                        blade.drawOn(canvas);
+                    }
                 }
                 // c. Draw the flying android
                 flyingShark.drawOn(canvas);
@@ -409,12 +420,12 @@ public class FlyingSharkView extends SurfaceView {
             flyingShark = new FlyingShark(this, context);
         }
         if(level.equals("Medium")||level.equals("Hard")) {
-            killer = new Killer(context);
+            killer = null;
             killerCreationTime=-1;
         }
         if(level.equals("Hard")) {
-            fog = new Fog(context);
-            blade = new Blade(context);
+            fog = null;
+            blade = null;
             fogCreationTime = -1;
             bladeCreationTime = -1;
         }
