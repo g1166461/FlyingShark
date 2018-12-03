@@ -24,7 +24,9 @@ public class Blade extends Sprite{
 
     /** Reset the x, y position of the flying android. */
 
-
+    public void increaseSpeed(){
+        dx-=3;
+    }
     @Override
     /** Move the flying android. */
     public void move() {

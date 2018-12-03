@@ -350,6 +350,7 @@ public class FlyingSharkView extends SurfaceView {
         if (bladeCreationTime == -1 || timeDiff > ((Math.random()*10000)+5000)) {
             bladeCreationTime = gameTime;
             blade=new Blade(context);
+            blade.increaseSpeed();
         }
     }
 
